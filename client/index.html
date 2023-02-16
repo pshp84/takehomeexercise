@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket App</title>
+  </head>
+
+  <style>
+    .container .editor {
+      width: 100%;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h2>
+        Text inputed in the textarea below will be emitted on the server through
+        web socket
+      </h2>
+      <textarea class="editor" id="webSocketEditor" rows="15"></textarea>
+    </div>
+
+    <script>
+      const socketAddress = "ws://localhost:3000"
+
+      const editor = document.getElementById("webSocketEditor")
+
+      const ws = new WebSocket(socketAddress)
+
+      editor.addEventListener("input", () => {
+        ws.send(editor.value)
+      })
+    </script>
+  </body>
+</html>
